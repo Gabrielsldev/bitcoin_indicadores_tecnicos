@@ -1,6 +1,8 @@
 import pandas as pd
 import plotly.graph_objects as go
 import os
+import sys
+import getopt
 
 df = pd.read_csv("bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv")
 df_copy = df.copy()
@@ -10,8 +12,15 @@ candlestick_df = df_copy.drop(["Volume_(BTC)", "Volume_(Currency)", "Weighted_Pr
 candlestick_df["Timestamp"] = pd.to_datetime(candlestick_df["Timestamp"], unit='s')
 candlestick_df.set_index("Timestamp", inplace=True)
 
-dia_inicio = "2019/12/31"
-dia_fim = "2020/01/01"
+# dia_inicio = "2019/12/31"
+# dia_fim = "2020/01/01"
+
+#Command line arguments
+full_cmd_arguments = sys.argv
+argument_list = full_cmd_arguments[1:]
+dia_inicio = argument_list[0]
+dia_fim = argument_list[1]
+
 
 date_time_inicio = pd.to_datetime(dia_inicio)
 date_time_fim = pd.to_datetime(dia_fim)
