@@ -17,8 +17,8 @@
 
 ### Instrunções de uso
 
-* Clone o repositório para baixar os arquivos.
-  * O banco de dados utilizado encontra-se no respositório em formato `.zip` no arquivo [archive.zip](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/archive.zip).
+* Clone o repositório utilizando `$ git clone https://github.com/Gabrielsldev/Desafio-Smarttbot.git` para o diretório de trabalho desejado.
+  * O arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` encontra-se no respositório em formato `.zip` no arquivo [archive.zip](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/archive.zip).
   * Também é possível fazer o [download](https://www.kaggle.com/mczielinski/bitcoin-historical-data/data#coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv) do arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` diretamente do Kaggle.
 
 * Os pacotes necessários para a execução do programa encontram-se no arquivo [requirements.txt](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/requirements.txt) neste repositório. São eles: 
@@ -34,7 +34,7 @@
 
 * O usuário deve criar um ambiente virtual e instalar os pacotes listados acima para que seja possível executar o programa.
 
-**O programa deve ser executado com parâmetros fornecidos através de argumentos em linha de comando:**
+**O programa** `main.py` **deve ser executado com parâmetros fornecidos através de argumentos em linha de comando:**
 
 `$ python main.py arg1 arg2`
 
@@ -46,7 +46,7 @@
 
 * O banco de dados fornecido possui dados entre as datas 2012/01/01 e 2020/09/14. É feito um teste para saber se os argumentos estão dentro do período indicado.
 
-**NOTA:** O arquivo do banco de dados deve estar na mesma pasta do arquivo `main.py`.
+**NOTA:** O arquivo do banco de dados, `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv`, deve estar na mesma pasta do arquivo `main.py`.
 
 ***
 
