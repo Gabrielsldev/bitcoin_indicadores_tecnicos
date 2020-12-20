@@ -1,12 +1,11 @@
-# **Documentação Desafio-Smarttbot**
-
+# **Documentação Desafio Smarttbot**
 ## Desafio Técnico para Desenvolvedor de Estratégias
 ###### Desenvolvido por **Gabriel Sobreira Lopes**
 
 ### Descrição
 
 * A aplicação calcula três indicadores técnicos financeiros a partir de dados do Bitcoin:
-  * **Médias móveis exponenciais**
+  * **Médias Móveis Exponenciais**
   * **Bandas de Bollinger**
   * **Nuvem de Ichimoku**
 
@@ -64,12 +63,12 @@ Após a execução do programa, as saídas esperadas são:
 |data/hora|   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |
 |data/hora|   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |   .....   |
 
-* Cada coluna representa os seguintes indicadores:
+* As colunas representam os seguintes indicadores:
   * **indicador-0:** Média Móvel Exponencial de 10 períodos
   * **indicador-1:** Média Móvel Exponencial de 30 períodos
-  * **indicador-2:** Banda Superior - Bandas de Bollinger
-  * **indicador-3:** Média Móvel Simples - Bandas de Bollinger
-  * **indicador-4:** Banda Inferior - Bandas de Bollinger
+  * **indicador-2:** Bandas de Bollinger - Banda Superior 
+  * **indicador-3:** Bandas de Bollinger - Média Móvel Simples 
+  * **indicador-4:** Bandas de Bollinger - Banda Inferior 
   * **indicador-5:** Ichimoku - Tenkan Sen
   * **indicador-6:** Ichimoku - Kijun Sen
   * **indicador-7:** Ichimoku - Senkou Span A
@@ -87,14 +86,14 @@ Após a execução do programa, as saídas esperadas são:
 
 ### Implementação
 
-Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta excelente para visualizar e manipular dados de maneira rápida e prática. O arquivo `.ipynp` pode ser encontrado no repositório.
+Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta excelente para visualizar e manipular dados de maneira rápida e prática. O [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/Desafio_Smarttbot.ipynb) `.ipynp` pode ser encontrado no repositório.
 
 * Foi utilizada a biblioteca `Pandas` para a manipulação dos dados.
   * Limpeza dos dados com a retirada de informações desnecessárias, diminuindo o tamanho do banco de dados e, consequentemente, aumentando a velocidade.
   * Manipulação dos dados utilizando funções para calcular os indicadores necessários.
 
 * Foi utilizada a biblioteca `Plotly` para plotar os gráficos por ser versátil e de fácil uso para gráficos com dados financeiros.
-  * Outra boa ferramenta para plotar gráficos OHLC é o `mplfinance`, mas o `Plotly` permite interação no Jupyter Notebook, fato que pesou na escolha.
+  * Outra boa ferramenta para plotar gráficos OHLC é o `mplfinance`, mas o `Plotly` permite interação diretamente no navegador e no Jupyter Notebook, fato que pesou na escolha.
   * O pacote `Kaleido` é utilizado pelo `Plotly` para exportar os gráficos como `PNG`.
 
 Foi utilizado o PyCharm para a criação do [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py` que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
@@ -115,6 +114,7 @@ O programa `teste.py` pode ser utilizado para fazer testes e comparar dois arqui
 * Os argumentos devem ser os nomes dos arquivos a serem testados, por exemplo: `$ python teste.py dataset1.csv dataset2.csv`
 
 Os dois arquivos serão transformados em dataframes e comparados. Caso haja divergências, será informado no terminal.
+* A saída _None_ significa que não há divergências.
 
 **NOTA:** Os dois arquivos a serem comparados devem estar no mesmo diretório que o programa `teste.py`.
 
@@ -127,8 +127,10 @@ A aplicação apresenta algumas limitações:
 * O programa aceita como parâmetros somente valores de Dia de Início e Dia de Fim, como sugerido no desafio.
   * Nesse ponto, há algumas melhorias que podem ser feitas:
     * O banco de dados possui, na coluna `Timestamp`, informação de data e hora. Uma melhoria pode ser a implementação de argumentos com data e hora para permitir períodos intraday.
-    * Permitir, via parâmetros fornecidos através de argumentos em linha de comando, a alteração dos períodos das Médias Móveis Exponenciais.
+    * Permitir, via parâmetros fornecidos através de argumentos em linha de comando, a alteração dos períodos das Médias Móveis Exponenciais, por exemplo, dentre outros indicadores.
 
 * Testes automatizados e mais complexos.
   * O programa `teste.py` permite testar e comparar dois arquivos CSV desde que o usuário forneça os parâmetros como argumentos na linha de comando, ou seja, de forma manual. Uma possível melhoria é implementar uma automatização dos testes.
   * Outros tipos de teste, como velocidade de execução.
+
+***
