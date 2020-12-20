@@ -9,3 +9,6 @@ arquivo possui os dados para a formação dos candlesticks e entendo serem sufic
 grande e ultrapassa os 100mb permitidos pelo Github, de modo que não é possível incluir ele no repositório. É necessário,
 assim, fazer o download do arquivo no link fornecido e deixá-lo na mesma pasta do arquivo main.py.
 
+
+Limitações:
+Usar templates

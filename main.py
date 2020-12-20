@@ -2,7 +2,31 @@ import pandas as pd
 import plotly.graph_objects as go
 import os
 import sys
-import getopt
+import re
+
+#Command line arguments
+full_cmd_arguments = sys.argv
+argument_list = full_cmd_arguments[1:]
+dia_inicio = argument_list[0]
+dia_fim = argument_list[1]
+
+teste_formato = re.compile("^[0-9]{4}[/][0-9]{2}[/][0-9]{2}$")
+
+if teste_formato.match(dia_inicio and dia_fim):
+    date_time_inicio = pd.to_datetime(dia_inicio)
+    date_time_fim = pd.to_datetime(dia_fim)
+else:
+    print("Erro: Os parâmetros devem seguir o formato AAAA/MM/DD")
+    exit()
+
+data_maxima = pd.to_datetime("2020/09/14")
+data_minima = pd.to_datetime("2012/01/01")
+
+if date_time_inicio < data_minima or date_time_fim > data_maxima:
+    print("Erro: Datas devem estar entre 2012/01/01 e 2020/09/14")
+    exit()
+
+################################
 
 df = pd.read_csv("bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv")
 df_copy = df.copy()
@@ -11,19 +35,6 @@ candlestick_df = df_copy.drop(["Volume_(BTC)", "Volume_(Currency)", "Weighted_Pr
 
 candlestick_df["Timestamp"] = pd.to_datetime(candlestick_df["Timestamp"], unit='s')
 candlestick_df.set_index("Timestamp", inplace=True)
-
-# dia_inicio = "2019/12/31"
-# dia_fim = "2020/01/01"
-
-#Command line arguments
-full_cmd_arguments = sys.argv
-argument_list = full_cmd_arguments[1:]
-dia_inicio = argument_list[0]
-dia_fim = argument_list[1]
-
-
-date_time_inicio = pd.to_datetime(dia_inicio)
-date_time_fim = pd.to_datetime(dia_fim)
 
 dados_para_teste = candlestick_df[(candlestick_df.index >= date_time_inicio) & (candlestick_df.index <= date_time_fim)]
 
