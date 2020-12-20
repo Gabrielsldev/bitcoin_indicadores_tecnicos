@@ -5,7 +5,7 @@
 
 ### Descrição
 
-* A aplicação calcula dois indicadores técnicos financeiros a partir de dados do Bitcoin:
+* A aplicação calcula três indicadores técnicos financeiros a partir de dados do Bitcoin:
   * **Médias móveis exponenciais**
   * **Bandas de Bollinger**
   * **Nuvem de Ichimoku**
@@ -22,7 +22,7 @@
   * O banco de dados utilizado encontra-se no respositório em formato `.zip` no arquivo [archive.zip](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/archive.zip).
   * Também é possível fazer o [download](https://www.kaggle.com/mczielinski/bitcoin-historical-data/data#coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv) do arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` diretamente do Kaggle.
 
-* Os pacotes necessários para a execução do programa encontram-se no aquivo [requirements.txt](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/requirements.txt) neste repositório. São eles: 
+* Os pacotes necessários para a execução do programa encontram-se no arquivo [requirements.txt](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/requirements.txt) neste repositório. São eles: 
 `install==1.3.4`
 `kaleido==0.1.0`
 `numpy==1.19.4`
@@ -53,7 +53,7 @@
 
 ### Resultados esperados
 
-Após a execução do programa, os saídas esperadas são:
+Após a execução do programa, as saídas esperadas são:
 
 **Um arquivo** `.ZIP` **contendo um arquivo** `CSV` **com o seguinte formato:**
 
@@ -81,23 +81,25 @@ Após a execução do programa, os saídas esperadas são:
   * Um com o indicador Bandas de Bollinger.
   * Um com o indicador Nuvens de Ichimoku.
 
+**Os três gráficos devem ser plotados no navegar.**
+
 ***
 
 ### Implementação
 
-Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta excelente para visualizar e manipular dados de maneira rápida e prática. O arquivo `.ipynp` pode ser encontrado no respositório.
+Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta excelente para visualizar e manipular dados de maneira rápida e prática. O arquivo `.ipynp` pode ser encontrado no repositório.
 
-* Foi utilizado a biblioteca `Pandas` para a manipulação dos dados.
-  * Limpeza dos dados com a retirada de informações desnecessárias, diminuindo o tamanho do banco de dados e, consequentemente, aumentando a velicidade.
+* Foi utilizada a biblioteca `Pandas` para a manipulação dos dados.
+  * Limpeza dos dados com a retirada de informações desnecessárias, diminuindo o tamanho do banco de dados e, consequentemente, aumentando a velocidade.
   * Manipulação dos dados utilizando funções para calcular os indicadores necessários.
 
-* Foi utilizado a biblioteca `Plotly` para plotar os gráficos por ser versátil e de fácil uso para gráficos com dados financeiros.
-  * Outra ferramenta excelente para plotar gráficos OHLC é o mplfinance, mas o Plotly permite interação no Jupyter Notebook, fato que pesou na escolha.
+* Foi utilizada a biblioteca `Plotly` para plotar os gráficos por ser versátil e de fácil uso para gráficos com dados financeiros.
+  * Outra boa ferramenta para plotar gráficos OHLC é o `mplfinance`, mas o `Plotly` permite interação no Jupyter Notebook, fato que pesou na escolha.
   * O pacote `Kaleido` é utilizado pelo `Plotly` para exportar os gráficos como `PNG`.
 
 Foi utilizado o PyCharm para a criação do [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py` que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
 
-* Foi utilizado _regular expressions_ para verificar se or argumentos estão no formato `AAAA/MM/DD` juntamente com _if statements_ para verificar se as datas escolhidas estão dentro do período fornecido pelo banco de dados.
+* Foi utilizado _regular expressions_ para verificar se os argumentos estão no formato `AAAA/MM/DD` juntamente com _if statements_ para verificar se as datas escolhidas estão dentro do período fornecido pelo banco de dados.
 
 
 ***
