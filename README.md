@@ -15,7 +15,7 @@
 
 ***
 
-### Instrunções de uso
+### Instruções de uso
 
 * Clone o repositório utilizando `$ git clone https://github.com/Gabrielsldev/Desafio-Smarttbot.git` para o diretório de trabalho desejado.
   * O arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` encontra-se no respositório em formato `.zip` no arquivo [archive.zip](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/archive.zip).
@@ -80,7 +80,7 @@ Após a execução do programa, as saídas esperadas são:
   * Um com o indicador Bandas de Bollinger.
   * Um com o indicador Nuvens de Ichimoku.
 
-**Os três gráficos devem ser plotados no navegar.**
+**Os três gráficos devem ser plotados no navegador.**
 
 ***
 
@@ -96,7 +96,7 @@ Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta ex
   * Outra boa ferramenta para plotar gráficos OHLC é o `mplfinance`, mas o `Plotly` permite interação diretamente no navegador e no Jupyter Notebook, fato que pesou na escolha.
   * O pacote `Kaleido` é utilizado pelo `Plotly` para exportar os gráficos como `PNG`.
 
-Foi utilizado o PyCharm para a criação do [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py` que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
+Foi utilizado o PyCharm para a criação do [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py`, que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
 
 * Foi utilizado _regular expressions_ para verificar se os argumentos estão no formato `AAAA/MM/DD` juntamente com _if statements_ para verificar se as datas escolhidas estão dentro do período fornecido pelo banco de dados.
 
@@ -130,7 +130,7 @@ A aplicação apresenta algumas limitações:
     * Permitir, via parâmetros fornecidos através de argumentos em linha de comando, a alteração dos períodos das Médias Móveis Exponenciais, por exemplo, dentre outros indicadores.
 
 * Testes automatizados e mais complexos.
-  * O programa `teste.py` permite testar e comparar dois arquivos CSV desde que o usuário forneça os parâmetros como argumentos na linha de comando, ou seja, de forma manual. Uma possível melhoria é implementar uma automatização dos testes.
+  * O programa `teste.py` permite testar e comparar dois arquivos `CSV` desde que o usuário forneça os parâmetros como argumentos na linha de comando, ou seja, de forma manual. Uma possível melhoria é implementar uma automatização dos testes.
   * Outros tipos de teste, como velocidade de execução.
 
 ***
