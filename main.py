@@ -16,14 +16,17 @@ if teste_formato.match(dia_inicio and dia_fim):
     date_time_inicio = pd.to_datetime(dia_inicio)
     date_time_fim = pd.to_datetime(dia_fim)
 else:
-    print("Erro: Os parâmetros devem seguir o formato AAAA/MM/DD")
+    print("Erro: Os parâmetros devem seguir o formato AAAA/MM/DD.")
     exit()
 
 data_maxima = pd.to_datetime("2020/09/14")
 data_minima = pd.to_datetime("2012/01/01")
 
 if date_time_inicio < data_minima or date_time_fim > data_maxima:
-    print("Erro: Datas devem estar entre 2012/01/01 e 2020/09/14")
+    print("Erro: Datas devem estar entre 2012/01/01 e 2020/09/14.")
+    exit()
+elif date_time_inicio > date_time_fim:
+    print("Erro: Data inicial deve ser menor do que data final.")
     exit()
 
 ################################
