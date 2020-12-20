@@ -1,15 +1,19 @@
+# Importa as dependências necessárias
 import pandas as pd
 import plotly.graph_objects as go
 import os
 import sys
 import re
 
-#ACEITA OS
+# Carrega os argumentos fornecidos por comando de linha.
+# Retira o primeiro argumento (main.py) e atribui as datas entradas pelo usuário
+# às variáveis dia_inicio e dia_fim
 full_cmd_arguments = sys.argv
 argument_list = full_cmd_arguments[1:]
 dia_inicio = argument_list[0]
 dia_fim = argument_list[1]
 
+# Testa se os argumentos estão no formato adequado
 teste_formato = re.compile("^[0-9]{4}[/][0-9]{2}[/][0-9]{2}$")
 
 if teste_formato.match(dia_inicio and dia_fim):
@@ -19,6 +23,7 @@ else:
     print("Erro: Os parâmetros devem seguir o formato AAAA/MM/DD.")
     exit()
 
+# Testa se as datas estão entre o intervalo permitido
 data_maxima = pd.to_datetime("2020/09/14")
 data_minima = pd.to_datetime("2012/01/01")
 
@@ -30,27 +35,24 @@ elif datetime_inicio > datetime_fim:
     exit()
 
 
-# CARREGA O BANCO DE DADOS
-
-# Carrega o banco de dados e exlcui os dados desnecessários
+# Carrega o banco de dados, exclui os dados desnecessários e transforma "Timestamp" em datetime.
 df = pd.read_csv("bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv")
 df_copy = df.copy()
 candlestick_df = df_copy.drop(["Volume_(BTC)", "Volume_(Currency)", "Weighted_Price"], axis=1).dropna()
 candlestick_df["Timestamp"] = pd.to_datetime(candlestick_df["Timestamp"], unit='s')
 candlestick_df.set_index("Timestamp", inplace=True)
 
-## DEFINE O PERÍODO
+# Cria um dataframe com o período definido pelo usuário via argumentos de linha de comando
 
-# Período definido pelo usuário via argumentos de linha de comando
-
-datetime_fim = datetime_fim + pd.DateOffset(1)
-
+datetime_fim = datetime_fim + pd.DateOffset(1) #Adiciona um dia ao período final
 dados_selecionados = candlestick_df[(candlestick_df.index >= datetime_inicio) &
                                   (candlestick_df.index <= datetime_fim)]
+# É necessário adicionar um dia à data final pois datetime_fim possui data e hora, sendo a última hora do dia 23:59:00,
+# de modo que dados_selecionados não incluiria o último dia desejado pelo usuário
 
-## MÉDIAS MÓVEIS EXPONENCIAIS
+# MÉDIAS MÓVEIS EXPONENCIAIS
 
-# Cálculo do atenuado K
+# Cálculo do atenuador K
 periodos10 = 10
 k10 = (2 / (periodos10 + 1))
 periodos30 = 30
@@ -60,11 +62,8 @@ k30 = (2 / (periodos30 + 1))
 mme10 = dados_selecionados["Close"].ewm(alpha=k10, adjust=False).mean()
 mme30 = dados_selecionados["Close"].ewm(alpha=k30, adjust=False).mean()
 
-
-## PLOTAR GRÁFICO
-
+# PLOTAR GRÁFICO MME
 # Dicionários que servirão de parâmetros para plotar o gráfico das médias móveis exponenciais.
-
 candles_grafico = {
     "x": dados_selecionados.index,
     "open": dados_selecionados["Open"],
@@ -102,19 +101,19 @@ mme30_grafico = {
 
 dados_grafico = [candles_grafico, mme10_grafico, mme30_grafico]
 
-fig = go.Figure(data = dados_grafico)
+fig = go.Figure(data=dados_grafico)
 fig.update_layout(xaxis_rangeslider_visible=False)
 
+# Plota gráfico interativo no navegador
 fig.show()
 
-## CRIAR PNG - MÉDIA MÓVEL EXPONENCIAL
-
+# Cria PNG das Médias Móveis Exponenciais
+# Testa para ver se o diretório "images" existe, senão o cria.
 if not os.path.exists("images"):
     os.mkdir("images")
-
 fig.write_image("images/mme.png", width=3840, height=2160)
 
-## BANDAS DE BOLLINGER
+# BANDAS DE BOLLINGER
 
 # Gera os dados para as Bandas de Bollinger utilizando o período definido pelo usuário
 # via argumentos de linha de comando.
@@ -125,8 +124,8 @@ banda_mms = dados_selecionados["Close"].rolling(window=20, min_periods=1).mean()
 banda_superior = banda_mms + (desvio_padrao * 2)
 banda_inferior = banda_mms - (desvio_padrao * 2)
 
+# PLOTAR GRÁFICO BANDAS DE BOLLINGER
 # Dicionários que servirão de parâmetros para plotar o gráfico das Bandas de Bollinger.
-
 candles_grafico = {
     "x": dados_selecionados.index,
     "open": dados_selecionados["Open"],
@@ -181,16 +180,16 @@ dados_grafico = [candles_grafico, banda_mms_grafico, banda_superior_grafico, ban
 fig = go.Figure(data = dados_grafico)
 fig.update_layout(xaxis_rangeslider_visible=False)
 
+# Plota gráfico interativo no navegador
 fig.show()
 
-## CRIAR PNG - BANDAS DE BOLLINGER
-
+# Cria PNG das Bandas de Bollinger
+# Testa para ver se o diretório "images" existe, senão o cria.
 if not os.path.exists("images"):
     os.mkdir("images")
-
 fig.write_image("images/bollinger.png", width=3840, height=2160)
 
-## NUVEM DE ICHIMOKU
+# NUVEM DE ICHIMOKU
 
 # Tenkan-sen (linha de conversão)
 tenkan_sen_max = dados_selecionados["High"].rolling(window=9).max()
@@ -214,7 +213,6 @@ senkou_span_b = ((senkou_span_b_max + senkou_span_b_min)*0.5).shift(26)
 chikou_span = dados_selecionados["Close"].shift(-26)
 
 # Dicionários que servirão de parâmetros para plotar o gráfico da Nuvem de Ichimoku.
-
 candles_grafico = {
     "x": dados_selecionados.index,
     "open": dados_selecionados["Open"],
@@ -294,17 +292,16 @@ dados_grafico = [candles_grafico, tenkan_sen_grafico, kijun_sen_grafico,
 fig = go.Figure(data = dados_grafico)
 fig.update_layout(xaxis_rangeslider_visible=False)
 
+# Plota gráfico interativo no navegador
 fig.show()
 
-## CRIAR ARQUIVO PNG PARA NUVEM DE ICHIMOKU
-
+# Cria PNG da Nuvem de Ichimoku
+# Testa para ver se o diretório "images" existe, senão o cria.
 if not os.path.exists("images"):
     os.mkdir("images")
-
 fig.write_image("images/ichimoku.png", width=3840, height=2160)
 
-## CRIAR O ARQUIVO CSV
-
+# CRIAR O ARQUIVO CSV
 # Cria um dataframe com os dados solicitados no desafio.
 
 arquivo_saida = pd.DataFrame(data=[dados_selecionados.index, mme10, mme30,
@@ -314,7 +311,7 @@ arquivo_saida = pd.DataFrame(data=[dados_selecionados.index, mme10, mme30,
 column_names = ["timestamp", "indicador-0", "indicador-1", "indicador-2", "indicador-3", "indicador-4",
                "indicador-5", "indicador-6", "indicador-7", "indicador-8", "indicador-9"]
 
-# COLUNAS:
+# LEGENDA DAS COLUNAS:
 # timestamp = Timestamp
 # indicador-0 = Média Móvel 10 Períodos
 # indicador-1 = Média Móvel 30 Períodos
@@ -328,7 +325,6 @@ column_names = ["timestamp", "indicador-0", "indicador-1", "indicador-2", "indic
 # indicador-9 = Ichimoku - Chikou Span
 
 # Altera os nomes das colunas de acordo com a lista column_names e organiza os dados para a saída CSV.
-
 for i in arquivo_saida.columns:
     arquivo_saida[column_names[i]] = arquivo_saida[i]
 
@@ -336,5 +332,6 @@ arquivo_saida.set_index("timestamp", inplace=True)
 
 arquivo_saida = arquivo_saida.drop([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], axis=1)
 
+# Cria um arquivo .zip contendo o arquivo CSV "indicadores.CSV"
 compression_opts = dict(method="zip", archive_name="indicadores.csv")
-arquivo_saida.to_csv("out.zip", compression=compression_opts)
+arquivo_saida.to_csv("arquivo_output.zip", compression=compression_opts)
