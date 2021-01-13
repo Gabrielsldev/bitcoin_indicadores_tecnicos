@@ -1,5 +1,5 @@
-# **Documentação Desafio Smarttbot**
-## Desafio Técnico para Desenvolvedor de Estratégias
+# **BITCOIN E INDICADORES TÉCNICOS**
+## MME, Bandas de Bollinger e Nuvem de Ichimoku
 ###### Desenvolvido por **Gabriel Sobreira Lopes**
 
 ### Descrição
@@ -11,7 +11,7 @@
 
 * O dataset utilizado foi retirado do Kaggle neste [link](https://www.kaggle.com/mczielinski/bitcoin-historical-data/data#coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv).
 
-**NOTA:** No desafio, foi indicado a utilização do arquivo `coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv`. Conforme histórico no Kaggle, ele foi removido na atualização de setembro de 2020, versão 3. Os dados para a formação dos candlesticks ("Open", "High", "Low" e "Close") encontram-se agora no arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv`, fornecido no mesmo [link](https://www.kaggle.com/mczielinski/bitcoin-historical-data/data#coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv). Dessa forma, **foi utilizado o arquivo** `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv`.
+**NOTA:** Os dados para a formação dos candlesticks ("Open", "High", "Low" e "Close") encontram-se no arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv`, fornecido no mesmo [link](https://www.kaggle.com/mczielinski/bitcoin-historical-data/data#coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv). **O arquivo** `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` **precisa estar no mesmo diretório que o arquivo** `main.py`.
 
 ***
 
@@ -80,7 +80,7 @@ Após a execução do programa, as saídas esperadas são:
   * Um com o indicador Bandas de Bollinger.
   * Um com o indicador Nuvens de Ichimoku.
 
-**Os três gráficos devem ser plotados no navegador.**
+**Os três gráficos também serão plotados no navegador.**
 
 ***
 
@@ -96,7 +96,7 @@ Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta ex
   * Outra boa ferramenta para plotar gráficos OHLC é o `mplfinance`, mas o `Plotly` permite interação diretamente no navegador e no Jupyter Notebook, fato que pesou na escolha.
   * O pacote `Kaleido` é utilizado pelo `Plotly` para exportar os gráficos como `PNG`.
 
-Foi utilizado o PyCharm para a criação do [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py`, que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
+Foi criado o [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py`, que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
 
 * Foi utilizado _regular expressions_ para verificar se os argumentos estão no formato `AAAA/MM/DD` juntamente com _if statements_ para verificar se as datas escolhidas estão dentro do período fornecido pelo banco de dados.
 
@@ -124,13 +124,12 @@ Os dois arquivos serão transformados em dataframes e comparados. Caso haja dive
 
 A aplicação apresenta algumas limitações:
 
-* O programa aceita como parâmetros somente valores de Dia de Início e Dia de Fim, como sugerido no desafio.
+* O programa aceita como parâmetros somente valores de Dia de Início e Dia de Fim.
   * Nesse ponto, há algumas melhorias que podem ser feitas:
     * O banco de dados possui, na coluna `Timestamp`, informação de data e hora. Uma melhoria pode ser a implementação de argumentos com data e hora para permitir períodos intraday.
     * Permitir, via parâmetros fornecidos através de argumentos em linha de comando, a alteração dos períodos das Médias Móveis Exponenciais, por exemplo, dentre outros indicadores.
 
 * Testes automatizados e mais complexos.
   * O programa `teste.py` permite testar e comparar dois arquivos `CSV` desde que o usuário forneça os parâmetros como argumentos na linha de comando, ou seja, de forma manual. Uma possível melhoria é implementar uma automatização dos testes.
-  * Outros tipos de teste, como velocidade de execução.
 
 ***
