@@ -1,4 +1,4 @@
-# Importa as dependências necessárias
+# Importa os módulos necessárias
 import pandas as pd
 import plotly.graph_objects as go
 import os
