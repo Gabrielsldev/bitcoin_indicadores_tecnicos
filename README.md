@@ -17,11 +17,11 @@
 
 ### Instruções de uso
 
-* Clone o repositório utilizando `$ git clone https://github.com/Gabrielsldev/Desafio-Smarttbot.git` para o diretório de trabalho desejado.
-  * O arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` encontra-se no respositório em formato `.zip` no arquivo [archive.zip](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/archive.zip).
+* Clone o repositório utilizando `$ git clone https://github.com/Gabrielsldev/bitcoin_indicadores_tecnicos.git` para o diretório de trabalho desejado.
+  * O arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` encontra-se no respositório em formato `.zip` no arquivo [archive.zip](https://github.com/Gabrielsldev/bitcoin_indicadores_tecnicos/blob/main/archive.zip).
   * Também é possível fazer o [download](https://www.kaggle.com/mczielinski/bitcoin-historical-data/data#coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv) do arquivo `bitstampUSD_1-min_data_2012-01-01_to_2020-09-14.csv` diretamente do Kaggle.
 
-* Os pacotes necessários para a execução do programa encontram-se no arquivo [requirements.txt](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/requirements.txt) neste repositório. São eles: 
+* Os pacotes necessários para a execução do programa encontram-se no arquivo [requirements.txt](https://github.com/Gabrielsldev/bitcoin_indicadores_tecnicos/blob/main/requirements.txt) neste repositório. São eles: 
 `install==1.3.4`
 `kaleido==0.1.0`
 `numpy==1.19.4`
@@ -86,7 +86,7 @@ Após a execução do programa, as saídas esperadas são:
 
 ### Implementação
 
-Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta excelente para visualizar e manipular dados de maneira rápida e prática. O [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/Desafio_Smarttbot.ipynb) `.ipynp` pode ser encontrado no repositório.
+Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta excelente para visualizar e manipular dados de maneira rápida e prática. O [arquivo](https://github.com/Gabrielsldev/bitcoin_indicadores_tecnicos/blob/main/bitcoin_notebook.ipynb) `.ipynp` pode ser encontrado no repositório.
 
 * Foi utilizada a biblioteca `Pandas` para a manipulação dos dados.
   * Limpeza dos dados com a retirada de informações desnecessárias, diminuindo o tamanho do banco de dados e, consequentemente, aumentando a velocidade.
@@ -96,7 +96,7 @@ Inicialmente, o código foi feito no Jupyter Notebook, por ser uma ferramenta ex
   * Outra boa ferramenta para plotar gráficos OHLC é o `mplfinance`, mas o `Plotly` permite interação diretamente no navegador e no Jupyter Notebook, fato que pesou na escolha.
   * O pacote `Kaleido` é utilizado pelo `Plotly` para exportar os gráficos como `PNG`.
 
-Foi criado o [arquivo](https://github.com/Gabrielsldev/Desafio-Smarttbot/blob/main/main.py) `main.py`, que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
+Foi criado o [arquivo](https://github.com/Gabrielsldev/bitcoin_indicadores_tecnicos/blob/main/main.py) `main.py`, que pode ser executado em linha de comando com os argumentos como parâmetros, conforme explicado nas instruções de uso.
 
 * Foi utilizado _regular expressions_ para verificar se os argumentos estão no formato `AAAA/MM/DD` juntamente com _if statements_ para verificar se as datas escolhidas estão dentro do período fornecido pelo banco de dados.
 
